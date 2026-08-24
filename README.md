@@ -113,6 +113,30 @@ npm run dev
 ```
 Frontend disponível em: http://localhost:5173
 
+### 🐳 Alternativa: rodar tudo com Docker Compose
+
+Também é possível subir o projeto inteiro (frontend, backend e banco de dados) com um único comando, usando o `docker-compose.yml` na raiz do repositório:
+
+```bash
+git clone https://github.com/Leander-Antonio/Dixi-Prova-DEV-2026
+cd Dixi-Prova-DEV-2026
+docker-compose up --build
+```
+
+- Frontend disponível em: http://localhost:5173
+- Backend disponível em: http://localhost:8080
+- MySQL disponível em: localhost:3306 (usuário `root`, senha `root`)
+
+Para parar e remover os containers:
+```bash
+docker-compose down
+```
+
+Para remover também os dados persistidos do banco:
+```bash
+docker-compose down -v
+```
+
 ---
 ## 📂 Estrutura do projeto
 
@@ -123,7 +147,9 @@ DIXI-PROVA-DEV-2026
 │       ├── src/                # Código-fonte da aplicação backend
 │       ├── .mvn/               # Configurações do Maven Wrapper
 │       ├── target/             # Arquivos gerados no build
-│       ├── docker-compose.yml  # Orquestração dos serviços (ex.: banco de dados)
+│       ├── Dockerfile          # Build da imagem do backend
+│       ├── .dockerignore       # Arquivos ignorados no build da imagem
+│       ├── docker-compose.yml  # Orquestração isolada do banco de dados (uso local)
 │       ├── pom.xml             # Gerenciamento de dependências e build
 │       ├── mvnw / mvnw.cmd     # Maven Wrapper
 │       └── HELP.md             # Instruções auxiliares do backend
@@ -136,8 +162,12 @@ DIXI-PROVA-DEV-2026
 │   ├── package.json            # Dependências e scripts do frontend
 │   ├── vite.config.js          # Configuração do Vite
 │   ├── tailwind.config.js      # Configuração do Tailwind CSS
-│   └── postcss.config.js       # Configuração do PostCSS
+│   ├── postcss.config.js       # Configuração do PostCSS
+│   ├── Dockerfile              # Build da imagem do frontend (Nginx)
+│   ├── nginx.conf              # Configuração do Nginx (SPA fallback)
+│   └── .dockerignore           # Arquivos ignorados no build da imagem
 │
+├── docker-compose.yml          # Orquestração completa (frontend + backend + banco)
 ├── README.md                   # Documentação do projeto
 └── .gitignore                  # Arquivos ignorados pelo Git
 ```

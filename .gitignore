@@ -28,7 +28,15 @@ build/
 application-*.properties
 
 # ======================
-# IDEs and OS
+# Environment variables
+# ======================
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# ======================
+# IDEs e OS
 # ======================
 .vscode/*
 !.vscode/extensions.json
